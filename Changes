@@ -1,5 +1,8 @@
 Revision history for Perl extension HTML::FillInForm::Lite.
 
+1.05 Tue Jul  7 18:03:07 2009
+	- fix a bug on undef in hash refs (thanks Chiba san)
+
 1.04 Sat May  2 15:39:35 2009
 	- not to add extra '/' to the end of <input> to be compatible with HTML 4
 
