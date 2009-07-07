@@ -397,9 +397,9 @@ sub _to_form_object{
 			$wrapper = {};
 			@{$wrapper}{ keys %{$ref} }
 				= map{
-					ref($_) eq 'ARRAY' ?  $_  :
-					defined($_)        ? [$_] :
-							      ();
+					  ref($_) eq 'ARRAY' ?  $_ 
+					: defined($_)        ? [$_]
+					:                      [  ];
 				} values %{$ref};
 		}
 		elsif($type eq 'ARRAY'){
