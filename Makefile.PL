@@ -11,6 +11,8 @@ test_requires 'Test::More' => 0.62;
 #build_requires 'macro' => 0.04;
 #pmc_support;
 
+auto_set_repository;
+
 WriteMakefile(
 	clean => {FILES => 'HTML-FillInForm-Lite-* cover_db'},
 );
