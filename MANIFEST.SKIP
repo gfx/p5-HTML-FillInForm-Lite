@@ -36,3 +36,5 @@
 
 # compiled perl module files
 \.pmc$
+
+\.git/

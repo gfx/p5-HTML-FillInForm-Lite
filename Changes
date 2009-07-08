@@ -1,5 +1,8 @@
 Revision history for Perl extension HTML::FillInForm::Lite.
 
+1.06 Wed Jul  8 14:08:23 2009
+	- update MANIFEST
+
 1.05 Tue Jul  7 18:03:07 2009
 	- fix a bug on undef in hash refs (thanks Chiba san)
 

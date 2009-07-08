@@ -8,7 +8,7 @@ use Carp ();
 
 #use Smart::Comments '####';
 
-our $VERSION  = '1.04';
+our $VERSION  = '1.05';
 
 # Regexp for HTML tags
 
@@ -604,7 +604,7 @@ HTML::FillInForm::Lite - Lightweight FillInForm module in Pure Perl
 
 =head1 VERSION
 
-The document describes HTML::FillInForm::Lite version 1.04
+The document describes HTML::FillInForm::Lite version 1.06
 
 =head1 SYNOPSIS
 
