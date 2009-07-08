@@ -8,7 +8,7 @@ use Carp ();
 
 #use Smart::Comments '####';
 
-our $VERSION  = '1.05';
+our $VERSION  = '1.06';
 
 # Regexp for HTML tags
 
