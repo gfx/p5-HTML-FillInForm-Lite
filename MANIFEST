@@ -1,7 +1,13 @@
+.gitignore
+.shipit
 Changes
+example/benchmark-with-tt.pl
 example/benchmark.pl
 example/checkbox.pl
 example/demo.cgi
+example/html/test.html
+example/html/test_part.html
+example/html/test_part_lite.html
 example/synopsis.pl
 example/testform1.tmpl
 example/testform2.tmpl
