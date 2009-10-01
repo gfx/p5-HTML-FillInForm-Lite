@@ -12,25 +12,40 @@ our $VERSION  = '1.06';
 
 # Regexp for HTML tags
 
-my $SPACE       =  q{\s};
-my $IDENT       =  q{\w+};
-my $ATTR_VALUE  =  q{(?: " [^"]* " | ' [^']* ' | [^'"/>/\s]+ )};
-my $ATTR        = qq{(?:$SPACE+ $IDENT = $ATTR_VALUE )};
+my $form     = q{[fF][oO][rR][mM]};
+my $input    = q{[iI][nN][pP][uU][tT]};
+my $select   = q{[sS][eE][lL][eE][cC][tT] };
+my $option   = q{[oO][pP][tT][iI][oO][nN] };
+my $textarea = q{[tT][eE][xX][tT][aA][rR][eE][aA]};
 
-my $FORM     = qq{(?: <form     $ATTR+ $SPACE*  > )};
-my $INPUT    = qq{(?: <input    $ATTR+ $SPACE*/?> )};
-my $SELECT   = qq{(?: <select   $ATTR+ $SPACE*  > )};
-my $OPTION   = qq{(?: <option   $ATTR* $SPACE*  > )};
-my $TEXTAREA = qq{(?: <textarea $ATTR+ $SPACE*  > )};
+my $checked  = q{[cC][hH][eE][cC][kK][eE][dD]};
+my $selected = q{[sS][eE][lL][eE][cC][tT][eE][dD]};
+my $multiple = q{[mM][uU][lL][tT][iI][pP][lL][eE]};
 
-my $END_FORM     = q{(?: </form>     )};
-my $END_SELECT   = q{(?: </select>   )};
-my $END_OPTION   = q{(?: </option>   )};
-my $END_TEXTAREA = q{(?: </textarea> )};
+my $id       = q{[iI][dD]};
+my $type     = q{[tT][yY][pP][eE]};
+my $name     = q{[nN][aA][mM][eE]};
+my $value    = q{[vV][aA][lL][uU][eE]};
 
-my $CHECKED  = q{(?: checked  = (?: "checked " | 'checked'  | checked  ) )};
-my $SELECTED = q{(?: selected = (?: "selected" | 'selected' | selected ) )};
-my $MULTIPLE = q{(?: multiple = (?: "multiple" | 'multiple' | multiple ) )};
+my $SPACE        =  q{\s};
+my $IDENT        =  q{\w+};
+my $ATTR_VALUE   =  q{(?: " [^"]* " | ' [^']* ' | [^'"/>\s]+ )};
+my $ATTR         = qq{(?:$SPACE+ $IDENT = $ATTR_VALUE )};
+
+my $FORM         = qq{(?: <$form     $ATTR+ $SPACE*  > )}; # <form>
+my $INPUT        = qq{(?: <$input    $ATTR+ $SPACE*/?> )}; # <input>
+my $SELECT       = qq{(?: <$select   $ATTR+ $SPACE*  > )}; # <select>
+my $OPTION       = qq{(?: <$option   $ATTR* $SPACE*  > )}; # <option>
+my $TEXTAREA     = qq{(?: <$textarea $ATTR+ $SPACE*  > )}; # <textarea>
+
+my $END_FORM     = qq{(?: </$form>     )};
+my $END_SELECT   = qq{(?: </$select>   )};
+my $END_OPTION   = qq{(?: </$option>   )};
+my $END_TEXTAREA = qq{(?: </$textarea> )};
+
+my $CHECKED      = qq{(?: $checked  = (?: "$checked " | '$checked'  | $checked  ) )};
+my $SELECTED     = qq{(?: $selected = (?: "$selected" | '$selected' | $selected ) )};
+my $MULTIPLE     = qq{(?: $multiple = (?: "$multiple" | '$multiple' | $multiple ) )};
 
 #my $DISABLED = q{(?: disabled = (?: "disabled" | 'disabled' | disabled ) )};
 
@@ -47,19 +62,19 @@ my $MULTIPLE = q{(?: multiple = (?: "multiple" | 'multiple' | multiple ) )};
 
 # utilities for getting HTML attributes
 sub _unquote{
-	$_[0] =~ /(['"]) (.*) \1/xms ? $2 : $_[0];
+	$_[0] =~ /(['"]) (.*) \1/xms ? $2 : $_[0]; # ' for poor editors
 }
 sub _get_id{
-	$_[0] =~ /id    = ($ATTR_VALUE)/oxmsi ? _unquote($1) : undef;
+	$_[0] =~ /$id    = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
 }
 sub _get_type{
-	$_[0] =~ /type  = ($ATTR_VALUE)/oxmsi ? _unquote($1) : undef;
+	$_[0] =~ /$type  = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
 }
 sub _get_name{
-	$_[0] =~ /name  = ($ATTR_VALUE)/oxmsi ? _unquote($1) : undef;
+	$_[0] =~ /$name  = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
 }
 sub _get_value{
-	$_[0] =~ /value = ($ATTR_VALUE)/oxmsi ? _unquote($1) : undef;
+	$_[0] =~ /$value = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
 }
 
 #use macro
@@ -198,7 +213,7 @@ sub fill :method{
 				(defined($id) and $context->{target} eq $id)
 					? $beg . _fill($context, $content) . $end
 					: $beg .                 $content  . $end
-		}goexmsi;
+		}goexms;
 
 		return $content;
 	}
@@ -211,13 +226,13 @@ sub fill :method{
 sub _fill{
 	my($context, $content) = @_;
 	$content =~ s{($INPUT)}
-		     { _fill_input($context, $1)                  }goexmsi;
+		     { _fill_input($context, $1)                  }goexms;
 
 	$content =~ s{($SELECT) (.*?) ($END_SELECT) }
-		     { $1 . _fill_select($context, $1, $2) . $3   }goexmsi;
+		     { $1 . _fill_select($context, $1, $2) . $3   }goexms;
 
 	$content =~ s{($TEXTAREA) (.*?) ($END_TEXTAREA) }
-		     { $1 . _fill_textarea($context, $1, $2) . $3 }goexmsi;
+		     { $1 . _fill_textarea($context, $1, $2) . $3 }goexms;
 
 	return $content;
 }
@@ -247,18 +262,18 @@ sub _fill_input{
 		}
 
 		if(grep { $value eq $_ } @{$values_ref}){
-			$tag =~ /$CHECKED/oxmsi
+			$tag =~ /$CHECKED/oxms
 				or $tag =~ s{$SPACE* (/?) > \z}
 					    { checked="checked" $1>}oxms;
 		}
 		else{
-			$tag =~ s/$SPACE+$CHECKED//goxmsi;
+			$tag =~ s/$SPACE+$CHECKED//goxms;
 		}
 	}
 	else{
 		my $new_value = $context->{escape}->(shift @{$values_ref});
 
-		$tag =~ s{value = $ATTR_VALUE}{value="$new_value"}oxmsi
+		$tag =~ s{$value = $ATTR_VALUE}{value="$new_value"}oxms
 			or $tag =~ s{$SPACE* (/?) > \z}
 				    { value="$new_value" $1>}oxms;
 	}
@@ -270,12 +285,12 @@ sub _fill_select{
 	my $values_ref = $context->_get_param( _get_name($tag) )
 		or return $content;
 
-	if($tag !~ /$MULTIPLE/oxmsi){
+	if($tag !~ /$MULTIPLE/oxms){
 		$values_ref = [ shift @{ $values_ref } ]; # in select-one
 	}
 
 	$content =~ s{($OPTION) (.*?) ($END_OPTION)}
-		     { _fill_option($context, $values_ref, $1, $2) . $2 . $3 }goexmsi;
+		     { _fill_option($context, $values_ref, $1, $2) . $2 . $3 }goexms;
 	return $content;
 }
 sub _fill_option{
@@ -293,12 +308,12 @@ sub _fill_option{
 
 	### @_
 	if(grep{ $value eq $_ }  @{$values_ref}){
-		$tag =~ /$SELECTED/oxmsi
+		$tag =~ /$SELECTED/oxms
 			or $tag =~ s{ $SPACE* > \z}
 				    { selected="selected">}oxms;
 	}
 	else{
-		$tag =~ s/$SPACE+$SELECTED//goxmsi;
+		$tag =~ s/$SPACE+$SELECTED//goxms;
 	}
 	return $tag;
 }
@@ -345,7 +360,7 @@ sub _escape_html{
 	$s =~ s/&/&amp;/g;
 	$s =~ s/</&lt;/g;
 	$s =~ s/>/&gt;/g;
-	$s =~ s/"/&quot;/g;
+	$s =~ s/"/&quot;/g; # " for poor editors
 	return $s;
 }
 
