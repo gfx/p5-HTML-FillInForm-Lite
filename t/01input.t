@@ -6,7 +6,7 @@ use warnings;
 use FindBin qw($Bin);
 use Fatal qw(open close);
 
-use Test::More tests => 93;
+use Test::More tests => 95;
 
 BEGIN{ use_ok('HTML::FillInForm::Lite') }
 
@@ -222,6 +222,8 @@ unlike $o->fill(\ q{<input type="checkbox" value="a" />}, $q),
 unlike $o->fill(\ q{<input type="checkbox" name="a" />}, $q),
 	$checked, "ignore undefined value";
 
+like $o->fill(\ q{<input type="checkbox" name="zero" value="0" />}, { zero => 0 }),
+    $checked, "zero value in checkbox";
 
 # radio
 
@@ -246,6 +248,9 @@ unlike $o->fill(\ q{<input type="radio" name="s" />}, $q),
 
 like $o->fill(\ q{<input type="radio" name="default" />}, $q),
 	$checked, "default radio button to on";
+
+like $o->fill(\ q{<input type="radio" name="zero" value="0" />}, { zero => "0" }),
+    $checked, "zero value in radio";
 
 # HTML escape
 
