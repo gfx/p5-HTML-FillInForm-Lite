@@ -825,7 +825,7 @@ Goro Fuji (藤 吾郎) E<lt>gfuji(at)cpan.orgE<gt>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (c) 2008-2009 Goro Fuji, Some rights reserved.
+Copyright (c) 2008-2010 Goro Fuji, Some rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
