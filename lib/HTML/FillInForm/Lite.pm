@@ -5,6 +5,7 @@ use 5.008_001;
 use strict;
 use warnings;
 use Carp ();
+use Scalar::Util ();
 
 #use Smart::Comments '####';
 
@@ -184,7 +185,7 @@ sub fill :method{
 		$content = join q{}, @{$src};
 	}
 	else{
-		if(not defined fileno $src){ # opened filehandle?
+		if(!Scalar::Util::openhandle($src)){
 			open my($in), '<'.$context->{layer}, $src
 				or Carp::croak("Cannot open '$src': $!");
 			$src = $in;
@@ -400,14 +401,11 @@ sub _decode_entity{
 sub _to_form_object{
 	my($ref) = @_;
 
-	my $type = ref $ref;
-
-	# Is it blessed?
-	my $blessed = $type ne q{}
-			&& !!do{ local $@; eval{ $ref->VERSION;1 } };
-
 	my $wrapper;
-	if(not $blessed){
+	my $type;
+
+	if(!Scalar::Util::blessed($ref)){
+	    $type = ref $ref;
 		if($type eq 'HASH'){
 			$wrapper = {};
 			@{$wrapper}{ keys %{$ref} }
