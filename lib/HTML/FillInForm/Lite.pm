@@ -1,6 +1,6 @@
 package HTML::FillInForm::Lite;
 
-use 5.008_001;
+use 5.006_000; # 5.6.0
 
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use Scalar::Util ();
 
 #use Smart::Comments '####';
 
-our $VERSION  = '1.07';
+our $VERSION  = '1.08';
 
 # Regexp for HTML tags
 
@@ -60,6 +60,13 @@ my $MULTIPLE     = qq{(?: $multiple = (?: "$multiple" | '$multiple' | $multiple 
 #    return \%f;
 #}
 
+if($] >= 5.008_001) {
+    *is_utf8     = \&utf8::is_utf8;
+    *utf8_decode = \&utf8::decode;
+}
+else {
+    *utf8_decode = *is_utf8 = sub { 0 };
+}
 
 # utilities for getting HTML attributes
 sub _unquote{
@@ -195,7 +202,7 @@ sub fill :method{
     }
 
     # if $content is utf8-flagged, params should be utf8-encoded
-    local $context->{utf8} = utf8::is_utf8($content);
+    local $context->{utf8} = is_utf8($content);
 
     # param object converted from data or object
     local $context->{data} =  _to_form_object($q);
@@ -343,7 +350,7 @@ sub _get_param{
 
         if($context->{utf8}){
             for my $datum( @{$ref} ){
-                utf8::decode($datum) unless utf8::is_utf8($datum);
+                utf8_decode($datum) unless is_utf8($datum);
             }
         }
     }
@@ -617,7 +624,7 @@ HTML::FillInForm::Lite - Lightweight FillInForm module in Pure Perl
 
 =head1 VERSION
 
-The document describes HTML::FillInForm::Lite version 1.07
+The document describes HTML::FillInForm::Lite version 1.08
 
 =head1 SYNOPSIS
 

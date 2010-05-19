@@ -1,5 +1,8 @@
 Revision history for Perl extension HTML::FillInForm::Lite.
 
+1.08 Wed May 19 12:03:53 2010
+	- Re-support 5.6.0
+
 1.07 Thu Oct  1 13:34:01 2009
 	- Optimize regular expressions for utf8-flagged contents
 
