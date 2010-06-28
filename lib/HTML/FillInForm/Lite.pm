@@ -210,13 +210,20 @@ sub fill :method{
         $content = join q{}, @{$src};
     }
     else{
-        if(!Scalar::Util::openhandle($src)){
-            open my($in), '<'.$context->{layer}, $src
-                or Carp::croak("Cannot open '$src': $!");
-            $src = $in;
+        my $is_fh = Scalar::Util::openhandle($src);
+
+        if($is_fh or !ref($src)) {
+            if(!$is_fh){
+                open my($in), '<'.$context->{layer}, $src
+                    or Carp::croak("Cannot open '$src': $!");
+                $src = $in;
+            }
+            local $/;
+            $content = readline($src); # slurp
         }
-        local $/;
-        $content = readline($src); # slurp
+        else {
+            $content = ${$src};
+        }
     }
 
     # if $content is utf8-flagged, params should be utf8-encoded

@@ -85,7 +85,7 @@ like $@, qr/cannot open/i, "Error: cannot open file";
 eval{
 	HTML::FillInForm::Lite->fill({}, \$s);
 };
-like $@, qr/Cannot open/i, "Error: bad arguments";
+like $@, qr/Not a SCALAR/i, "Error: bad arguments";
 
 # Cannot use '%s' as form object
 
