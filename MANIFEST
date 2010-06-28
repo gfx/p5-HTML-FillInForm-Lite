@@ -38,6 +38,8 @@ t/09decode_entity.t
 t/10compat.t
 t/11html4compat.t
 t/12empty_elem.t
+t/13simple.t
+t/14stringobj.t
 t/99pod.t
 t/99podcoverage.t
 t/test.html

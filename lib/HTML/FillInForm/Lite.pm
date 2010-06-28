@@ -4,7 +4,7 @@ use 5.006_000; # 5.6.0
 use strict;
 use warnings;
 
-our $VERSION  = '1.08';
+our $VERSION  = '1.09';
 
 use Exporter ();
 our @ISA       = qw(Exporter);
@@ -649,7 +649,7 @@ HTML::FillInForm::Lite - Lightweight FillInForm module in Pure Perl
 
 =head1 VERSION
 
-The document describes HTML::FillInForm::Lite version 1.08
+The document describes HTML::FillInForm::Lite version 1.09
 
 =head1 SYNOPSIS
 
