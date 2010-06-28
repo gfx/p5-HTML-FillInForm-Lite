@@ -1,15 +1,18 @@
 package HTML::FillInForm::Lite;
-
 use 5.006_000; # 5.6.0
 
 use strict;
 use warnings;
-use Carp ();
-use Scalar::Util ();
-
-#use Smart::Comments '####';
 
 our $VERSION  = '1.08';
+
+use Exporter ();
+our @ISA       = qw(Exporter);
+our @EXPORT_OK = qw(fillinform);
+
+#use Smart::Comments '####';
+use Carp ();
+use Scalar::Util ();
 
 # Regexp for HTML tags
 
@@ -66,6 +69,21 @@ if($] >= 5.008_001) {
 }
 else {
     *utf8_decode = *is_utf8 = sub { 0 };
+}
+
+sub fillinform { # function interface to fill()
+    if(@_ == 1) {
+        my($data) = @_;
+        my $fif = __PACKAGE__->new();
+        return sub {
+            my($form) = @_;
+            return $fif->fill(\$form, $data);
+        }
+    }
+    else {
+        my($form, $data) = @_;
+        return __PACKAGE__->fill(\$form, $data);
+    }
 }
 
 # utilities for getting HTML attributes
@@ -655,6 +673,12 @@ The document describes HTML::FillInForm::Lite version 1.08
     my $cd = Music::CD->retrieve(1);
     $output = $h->fill(\$html, $cd);
 
+    # simple function interface
+    use HTML::FillInForm::Lite qw(fillinform);
+
+    # the same as HTML::FillInForm::Lite->fill(...)
+    $output = fillinform(\$html, $q);
+
 =head1 DESCRIPTION
 
 This module fills in HTML forms with Perl data,
@@ -663,6 +687,19 @@ not using C<HTML::Parser>.
 
 The difference in the parsers makes C<HTML::FillInForm::Lite> about 2
 times faster than C<HTML::FillInForm>.
+
+=head1 FUNCTIONS
+
+=head2 fillinform(source, form_data)
+
+Simple interface to the C<fill()> method, accepting only a string.
+If you pass a single argument to this function, it is interpreted as
+I<form_data>, and returns a function that accepts I<source>.
+
+    my $fillinform = fillinform($query);
+    $fillinform->($html); # the same as fillinform($html, $query)
+
+This function is exportable.
 
 =head1 METHODS
 
