@@ -38,3 +38,4 @@
 \.pmc$
 
 \.git/
+\.xslate_cache/
