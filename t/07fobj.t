@@ -4,7 +4,7 @@
 
 use strict;
 use warnings;
-use Test::More tests => 18;
+use Test::More tests => 20;
 
 BEGIN{ use_ok('HTML::FillInForm::Lite') }
 
@@ -24,6 +24,8 @@ sub nv2re{
 
 my $tm = localtime();
 my $st = stat(__FILE__);
+isa_ok $tm, 'Time::tm';
+isa_ok $st, 'File::stat';
 
 my $o = HTML::FillInForm::Lite->new();
 
@@ -46,14 +48,14 @@ my $stf = <<'EOT';
 EOT
 
 my $output = $o->fill(\$tmf, $tm);
-foreach my $field qw(year mon mday hour min sec){
+foreach my $field (qw(year mon mday hour min sec)){
 	like $output, field2re($tm, $field), "field: tm->$field";
 }
 like $output, nv2re("no_such_field", "x"), "no such field";
 
 $output = $o->fill(\$stf, $st);
 
-foreach my $field qw(size atime mtime ctime){
+foreach my $field (qw(size atime mtime ctime)){
 	like $output, field2re($st, $field), "field: st->$field";
 }
 like $output, nv2re("no_such_field", "x"), "no such field";
