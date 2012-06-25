@@ -32,7 +32,7 @@
 \bcover_db\b
 #!end included /usr/local/lib/perl5/5.10.0/ExtUtils/MANIFEST.SKIP
 
-
+^MYMETA\.
 
 # compiled perl module files
 \.pmc$

@@ -2,6 +2,7 @@
 .shipit
 Changes
 example/benchmark-with-tt.pl
+example/benchmark-with-xslate.pl
 example/benchmark.pl
 example/checkbox.pl
 example/demo.cgi
@@ -40,6 +41,7 @@ t/11html4compat.t
 t/12empty_elem.t
 t/13simple.t
 t/14stringobj.t
+t/15data-attr.t
 t/99pod.t
 t/99podcoverage.t
 t/test.html
