@@ -32,9 +32,9 @@ my $name     = q{[nN][aA][mM][eE]};
 my $value    = q{[vV][aA][lL][uU][eE]};
 
 my $SPACE        =  q{\s};
-my $IDENT        =  q{\w+};
+my $ATTR_NAME    =  q{[\w\-]+};
 my $ATTR_VALUE   =  q{(?: " [^"]* " | ' [^']* ' | [^'"/>\s]+ )};
-my $ATTR         = qq{(?:$SPACE+ $IDENT = $ATTR_VALUE )};
+my $ATTR         = qq{(?:$SPACE+ $ATTR_NAME = $ATTR_VALUE )};
 
 my $FORM         = qq{(?: <$form     $ATTR+ $SPACE*  > )}; # <form>
 my $INPUT        = qq{(?: <$input    $ATTR+ $SPACE*/?> )}; # <input>
