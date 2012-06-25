@@ -1,5 +1,8 @@
 Revision history for Perl extension HTML::FillInForm::Lite.
 
+1.10 2012-06-25 20:01:26
+    - allow data-* attributes (github issue #1)
+
 1.09 Mon Jun 28 18:47:44 2010
 	- Add an exportable function fillinform()
 	- Make fill() accept string-like objects as sources
