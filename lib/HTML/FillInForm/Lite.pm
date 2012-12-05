@@ -33,9 +33,8 @@ my $value    = q{[vV][aA][lL][uU][eE]};
 
 my $SPACE        =  q{\s};
 my $ATTR_NAME    =  q{[\w\-]+};
-my $ATTR_VALUE   =  q{(?: " [^"]* " | ' [^']* ' | [^'"/>\s]+ )};
-# my $ATTR         = qq{(?:$SPACE+ $ATTR_NAME = $ATTR_VALUE )};
-my $ATTR         = qq{(?:$SPACE+ (?:$ATTR_NAME = $ATTR_VALUE | readonly | disabled | required) )};
+my $ATTR_VALUE   =  q{(?:" [^"]* " | ' [^']* ' | [^'"/>\s]+ | [\w\-]+ )};
+my $ATTR         = qq{(?: $SPACE+ (?: $ATTR_NAME (?: = $ATTR_VALUE )? ) )};
 
 my $FORM         = qq{(?: <$form     $ATTR+ $SPACE*  > )}; # <form>
 my $INPUT        = qq{(?: <$input    $ATTR+ $SPACE*/?> )}; # <input>
@@ -48,9 +47,15 @@ my $END_SELECT   = qq{(?: </$select>   )};
 my $END_OPTION   = qq{(?: </$option>   )};
 my $END_TEXTAREA = qq{(?: </$textarea> )};
 
-my $CHECKED      = qq{(?: $checked  = (?: "$checked " | '$checked'  | $checked  ) )};
-my $SELECTED     = qq{(?: (?: $selected = (?: "$selected" | '$selected' | $selected ) | $selected ) )};
-my $MULTIPLE     = qq{(?: $multiple = (?: "$multiple" | '$multiple' | $multiple ) )};
+my $CHECKED      = qq{(?:
+    $checked  (?: = (?: "$checked " | '$checked'  | $checked  ) )?
+)};
+my $SELECTED     = qq{(?:
+    $selected (?: = (?: "$selected" | '$selected' | $selected ) )?
+)};
+my $MULTIPLE     = qq{(?:
+    $multiple (?: = (?: "$multiple" | '$multiple' | $multiple ) )?
+)};
 
 #my $DISABLED = q{(?: disabled = (?: "disabled" | 'disabled' | disabled ) )};
 

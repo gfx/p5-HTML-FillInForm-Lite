@@ -42,6 +42,7 @@ t/12empty_elem.t
 t/13simple.t
 t/14stringobj.t
 t/15data-attr.t
+t/16html5.t
 t/99pod.t
 t/99podcoverage.t
 t/test.html
