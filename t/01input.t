@@ -188,7 +188,7 @@ unlike $o->fill(\ q{<input type="checkbox" name="foo" value="xxx" checked="check
 	      $checked, "checkbox off";
 unlike $o->fill(\ q{<input type="checkbox" name="foo" value="xxx" checked='checked' />}, $q),
 	      $checked, "checkbox off";
-	      
+
 unlike $o->fill(\ q{<input type="checkbox" name="foo" value="xxx" />}, $q),
 	      $checked, "checkbox off";
 
@@ -323,7 +323,7 @@ is $o->fill(\$y, $q), $y, "no inputable";
 $y = q{<input name="foo"value="" />};
 is $o->fill(\$y, $q), $y, "no space between attributes";
 
-$y = q{<input Hello name="foo" value="" />};
+$y = q{<input +Hello+ name="foo" value="" />};
 is $o->fill(\$y, $q), $y, "rubbish in tag";
 
 $y = q{<input name="foo" value=""};
