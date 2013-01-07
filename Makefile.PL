@@ -6,6 +6,7 @@ name 'HTML-FillInForm-Lite';
 
 all_from 'lib/HTML/FillInForm/Lite.pm';
 
+test_requires 'CGI';
 test_requires 'Test::More' => 0.62;
 
 #build_requires 'macro' => 0.04;
