@@ -62,9 +62,9 @@ my $MULTIPLE     = qq{(?:
 #sub _extract{ # for debugging only
 #    my $s = shift;
 #    my %f = (input => [], select => [], textarea => []);
-#    @{$f{input}}    = $s =~ m{($INPUT)}ogxmsi;
-#    @{$f{select}}   = $s =~ m{($SELECT.*?$END_SELECT)}ogxmsi;
-#    @{$f{textarea}} = $s =~ m{($TEXTAREA.*?$END_TEXTAREA)}ogxmsi;
+#    @{$f{input}}    = $s =~ m{($INPUT)}gxmsi;
+#    @{$f{select}}   = $s =~ m{($SELECT.*?$END_SELECT)}gxmsi;
+#    @{$f{textarea}} = $s =~ m{($TEXTAREA.*?$END_TEXTAREA)}gxmsi;
 #
 #    return \%f;
 #}
@@ -97,16 +97,16 @@ sub _unquote{
     $_[0] =~ /(['"]) (.*) \1/xms ? $2 : $_[0]; # ' for poor editors
 }
 sub _get_id{
-    $_[0] =~ /$id    = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
+    $_[0] =~ /$id    = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 sub _get_type{
-    $_[0] =~ /$type  = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
+    $_[0] =~ /$type  = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 sub _get_name{
-    $_[0] =~ /$name  = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
+    $_[0] =~ /$name  = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 sub _get_value{
-    $_[0] =~ /$value = ($ATTR_VALUE)/oxms ? _unquote($1) : undef;
+    $_[0] =~ /$value = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 
 #use macro
@@ -252,7 +252,7 @@ sub fill :method{
                 (defined($id) and $context->{target} eq $id)
                     ? $beg . _fill($context, $content) . $end
                     : $beg .                 $content  . $end
-        }goexms;
+        }gexms;
 
         return $content;
     }
@@ -265,13 +265,13 @@ sub fill :method{
 sub _fill{
     my($context, $content) = @_;
     $content =~ s{($INPUT)}
-             { _fill_input($context, $1)                  }goexms;
+             { _fill_input($context, $1)                  }gexms;
 
     $content =~ s{($SELECT) (.*?) ($END_SELECT) }
-             { $1 . _fill_select($context, $1, $2) . $3   }goexms;
+             { $1 . _fill_select($context, $1, $2) . $3   }gexms;
 
     $content =~ s{($TEXTAREA) (.*?) ($END_TEXTAREA) }
-             { $1 . _fill_textarea($context, $1, $2) . $3 }goexms;
+             { $1 . _fill_textarea($context, $1, $2) . $3 }gexms;
 
     return $content;
 }
@@ -301,20 +301,20 @@ sub _fill_input{
         }
 
         if(grep { $value eq $_ } @{$values_ref}){
-            $tag =~ /$CHECKED/oxms
+            $tag =~ /$CHECKED/xms
                 or $tag =~ s{$SPACE* (/?) > \z}
-                        { checked="checked" $1>}oxms;
+                        { checked="checked" $1>}xms;
         }
         else{
-            $tag =~ s/$SPACE+$CHECKED//goxms;
+            $tag =~ s/$SPACE+$CHECKED//gxms;
         }
     }
     else{
         my $new_value = $context->{escape}->(shift @{$values_ref});
 
-        $tag =~ s{$value = $ATTR_VALUE}{value="$new_value"}oxms
+        $tag =~ s{$value = $ATTR_VALUE}{value="$new_value"}xms
             or $tag =~ s{$SPACE* (/?) > \z}
-                    { value="$new_value" $1>}oxms;
+                    { value="$new_value" $1>}xms;
     }
     return $tag;
 }
@@ -329,7 +329,7 @@ sub _fill_select{
     }
 
     $content =~ s{($OPTION) (.*?) ($END_OPTION)}
-             { _fill_option($context, $values_ref, $1, $2) . $2 . $3 }goexms;
+             { _fill_option($context, $values_ref, $1, $2) . $2 . $3 }gexms;
     return $content;
 }
 sub _fill_option{
@@ -338,9 +338,9 @@ sub _fill_option{
     my $value = _get_value($tag);
     unless( defined $value ){
         $value = $content;
-        $value =~ s{\A $SPACE+   } {}oxms;
-        $value =~ s{   $SPACE{2,}}{ }oxms;
-        $value =~ s{   $SPACE+ \z} {}oxms;
+        $value =~ s{\A $SPACE+   } {}xms;
+        $value =~ s{   $SPACE{2,}}{ }xms;
+        $value =~ s{   $SPACE+ \z} {}xms;
     }
 
     $value = $context->{decode_entity}->($value);
@@ -349,10 +349,10 @@ sub _fill_option{
     if(grep{ $value eq $_ }  @{$values_ref}){
         $tag =~ /$SELECTED/oxms
             or $tag =~ s{ $SPACE* > \z}
-                    { selected="selected">}oxms;
+                    { selected="selected">}xms;
     }
     else{
-        $tag =~ s/$SPACE+$SELECTED//goxms;
+        $tag =~ s/$SPACE+$SELECTED//gxms;
     }
     return $tag;
 }
@@ -429,9 +429,9 @@ sub _decode_entity{
 #    my $name   = shift;
 #
 #    if($context->{disable_fields}{$name}){
-#        $_[0] =~ /$DISABLED/oxmsi
+#        $_[0] =~ /$DISABLED/xmsi
 #            or $_[0] =~ s{$SPACE* /? > \z}
-#                    { disabled="disabled" />}oxmsi;
+#                    { disabled="disabled" />}xmsi;
 #    }
 #    return;
 #}
