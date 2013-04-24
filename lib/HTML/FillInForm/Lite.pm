@@ -1,5 +1,5 @@
 package HTML::FillInForm::Lite;
-use 5.006_000; # 5.6.0
+use 5.008_001; # 5.8.1
 
 use strict;
 use warnings;
@@ -69,13 +69,6 @@ my $MULTIPLE     = qq{(?:
 #    return \%f;
 #}
 
-if($] >= 5.008_001) {
-    *is_utf8     = \&utf8::is_utf8;
-    *utf8_decode = \&utf8::decode;
-}
-else {
-    *utf8_decode = *is_utf8 = sub { 0 };
-}
 
 sub fillinform { # function interface to fill()
     if(@_ == 1) {
@@ -233,7 +226,7 @@ sub fill :method{
     }
 
     # if $content is utf8-flagged, params should be utf8-encoded
-    local $context->{utf8} = is_utf8($content);
+    local $context->{utf8} = utf8::is_utf8($content);
 
     # param object converted from data or object
     local $context->{data} =  _to_form_object($q);
@@ -381,7 +374,7 @@ sub _get_param{
 
         if($context->{utf8}){
             for my $datum( @{$ref} ){
-                utf8_decode($datum) unless is_utf8($datum);
+                utf8::decode($datum) unless utf8::is_utf8($datum);
             }
         }
     }
