@@ -12,3 +12,10 @@ cover_db/*
 nytprof*
 *.out
 .xslate_cache
+/HTML-FillInForm-Lite-*
+/.build
+/_build_params
+/Build
+!Build/
+!META.json
+!LICENSE

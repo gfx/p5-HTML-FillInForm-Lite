@@ -1,5 +1,7 @@
 Revision history for Perl extension HTML::FillInForm::Lite.
 
+{{$NEXT}}
+
 1.12 2013-01-07 14:30:11
     - Add CGI.pm to test_requires
 
