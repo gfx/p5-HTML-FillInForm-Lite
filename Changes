@@ -2,6 +2,10 @@ Revision history for Perl extension HTML::FillInForm::Lite.
 
 {{$NEXT}}
 
+1.13 2013-04-24T10:19:51Z
+    - Drop support of perl 5.6.0
+    - Just modernize the code and dist
+
 1.12 2013-01-07 14:30:11
     - Add CGI.pm to test_requires
 

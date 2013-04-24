@@ -4,7 +4,7 @@ use 5.008_001; # 5.8.1
 use strict;
 use warnings;
 
-our $VERSION  = '1.12';
+our $VERSION  = '1.13';
 
 use Exporter ();
 our @ISA       = qw(Exporter);
@@ -642,13 +642,15 @@ __END__
 
 =encoding utf-8
 
+=for stopwords fillinform bool iolayer fill_scalarref scalarref
+
 =head1 NAME
 
 HTML::FillInForm::Lite - Lightweight FillInForm module in Pure Perl
 
 =head1 VERSION
 
-The document describes HTML::FillInForm::Lite version 1.12
+The document describes HTML::FillInForm::Lite version 1.13
 
 =head1 SYNOPSIS
 
