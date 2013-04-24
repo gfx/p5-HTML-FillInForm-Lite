@@ -6,7 +6,7 @@ use warnings;
 
 use FindBin qw($Bin);
 
-use Benchmark qw(timethese cmpthese);
+use Benchmark qw(timethese cmpthese :hireswallclock);
 
 
 printf "[Perl v%vd]\n", $^V;
