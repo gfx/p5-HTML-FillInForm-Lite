@@ -90,16 +90,16 @@ sub _unquote{
     $_[0] =~ /(['"]) (.*) \1/xms ? $2 : $_[0]; # ' for poor editors
 }
 sub _get_id{
-    $_[0] =~ /$id    = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
+    $_[0] =~ /$SPACE $id    = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 sub _get_type{
-    $_[0] =~ /$type  = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
+    $_[0] =~ /$SPACE $type  = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 sub _get_name{
-    $_[0] =~ /$name  = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
+    $_[0] =~ /$SPACE $name  = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 sub _get_value{
-    $_[0] =~ /$value = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
+    $_[0] =~ /$SPACE $value = ($ATTR_VALUE)/xms ? _unquote($1) : undef;
 }
 
 #use macro
