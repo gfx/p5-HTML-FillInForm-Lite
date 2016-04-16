@@ -136,7 +136,7 @@ supplied, it will cause `die`.
 _options_ are the same as `new()`'s.
 
 You can use this method as a both class or instance method,
-but you make multiple calls to `fill()` with the __same__
+but you make multiple calls to `fill()` with the **same**
 options, it is a little faster to call `new()` and store the instance.
 
 _source_ may be a scalar reference, an array reference of strings, or
@@ -208,20 +208,20 @@ To avoid such problems, you can use the `ignore_fields` option.
 
 No bugs have been reported.
 
-Please report any bug or feature request to <gfuji(at)cpan.org>,
+Please report any bug or feature request to &lt;gfuji(at)cpan.org>,
 or through the RT [http://rt.cpan.org/](http://rt.cpan.org/).
 
 # SEE ALSO
 
-[HTML::FillInForm](http://search.cpan.org/perldoc?HTML::FillInForm).
+[HTML::FillInForm](https://metacpan.org/pod/HTML::FillInForm).
 
-[HTML::FillInForm::Lite::JA](http://search.cpan.org/perldoc?HTML::FillInForm::Lite::JA) - the document in Japanese.
+[HTML::FillInForm::Lite::JA](https://metacpan.org/pod/HTML::FillInForm::Lite::JA) - the document in Japanese.
 
-[HTML::FillInForm::Lite::Compat](http://search.cpan.org/perldoc?HTML::FillInForm::Lite::Compat) - HTML::FillInForm compatibility layer
+[HTML::FillInForm::Lite::Compat](https://metacpan.org/pod/HTML::FillInForm::Lite::Compat) - HTML::FillInForm compatibility layer
 
 # AUTHOR
 
-Goro Fuji (藤 吾郎) <gfuji(at)cpan.org>
+Goro Fuji (藤 吾郎) &lt;gfuji(at)cpan.org>
 
 # LICENSE AND COPYRIGHT
 

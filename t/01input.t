@@ -3,6 +3,7 @@
 use strict;
 use warnings;
 
+use Test::Requires qw(CGI);
 use FindBin qw($Bin);
 use Fatal qw(open close);
 

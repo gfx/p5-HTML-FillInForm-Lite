@@ -4,7 +4,7 @@
       "Goro Fuji (藤 吾郎) <gfuji(at)cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.0.56, CPAN::Meta::Converter version 2.130880",
+   "generated_by" : "Minilla/v3.0.1, CPAN::Meta::Converter version 2.150001",
    "license" : [
       "perl_5"
    ],
@@ -21,7 +21,8 @@
          "share",
          "eg",
          "examples",
-         "author"
+         "author",
+         "builder"
       ]
    },
    "prereqs" : {
@@ -34,17 +35,16 @@
       },
       "configure" : {
          "requires" : {
-            "CPAN::Meta" : "0",
-            "CPAN::Meta::Prereqs" : "0",
-            "Module::Build" : "0.38"
+            "Module::Build::Tiny" : "0.035"
          }
       },
       "develop" : {
          "requires" : {
             "Test::CPAN::Meta" : "0",
-            "Test::MinimumVersion" : "0.10108",
+            "Test::MinimumVersion::Fast" : "0.04",
+            "Test::PAUSE::Permissions" : "0.04",
             "Test::Pod" : "1.41",
-            "Test::Spellunker" : "v0.0.16"
+            "Test::Spellunker" : "v0.2.7"
          }
       },
       "runtime" : {
@@ -67,9 +67,10 @@
    },
    "version" : "1.13",
    "x_contributors" : [
-      "Fuji, Goro <gfuji@cpan.org>",
       "Fuji, Goro <fuji.goro@dena.jp>",
       "tokuhirom <tokuhirom@gmail.com>",
-      "Fuji, Goro <g.psy.va@gmail.com>"
+      "Fuji, Goro <g.psy.va@gmail.com>",
+      "mono <mono@mono0x.net>",
+      "FUJI Goro <gfuji@cpan.org>"
    ]
 }

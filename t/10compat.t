@@ -3,6 +3,7 @@
 
 use strict;
 use warnings;
+use Test::Requires qw(CGI);
 use Test::More tests => 50;
 
 use HTML::FillInForm::Lite::Compat;
@@ -298,7 +299,7 @@ $html = qq[
 my @html_array = split /\n/, $html;
 
 
-{ 
+{
     $result = HTML::FillInForm->new->fill_arrayref(
                                              \@html_array,
                                              fdat => {
