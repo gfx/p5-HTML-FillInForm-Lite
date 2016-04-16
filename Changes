@@ -2,6 +2,9 @@ Revision history for Perl extension HTML::FillInForm::Lite.
 
 {{$NEXT}}
 
+1.14 2016-04-16T13:24:00Z
+    - Fix a bug that attribute name "data-name" overrode the "name" attribute(#4 by @mono0x)
+
 1.13 2013-04-24T10:19:51Z
     - Drop support of perl 5.6.0
     - Just modernize the code and dist
