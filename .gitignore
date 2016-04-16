@@ -14,6 +14,7 @@ nytprof*
 .xslate_cache
 /HTML-FillInForm-Lite-*
 /.build
+/_build
 /_build_params
 /Build
 !Build/
