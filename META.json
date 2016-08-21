@@ -4,7 +4,7 @@
       "Goro Fuji (藤 吾郎) <gfuji(at)cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.0.1, CPAN::Meta::Converter version 2.150001",
+   "generated_by" : "Minilla/v3.0.4, CPAN::Meta::Converter version 2.150005",
    "license" : [
       "perl_5"
    ],
@@ -30,7 +30,8 @@
          "requires" : {
             "CGI" : "0",
             "ExtUtils::MakeMaker" : "6.59",
-            "Test::More" : "0.62"
+            "Test::More" : "0.62",
+            "Test::Requires" : "0"
          }
       },
       "configure" : {
@@ -72,5 +73,6 @@
       "Fuji, Goro <g.psy.va@gmail.com>",
       "mono <mono@mono0x.net>",
       "FUJI Goro (gfx) <gfuji@cpan.org>"
-   ]
+   ],
+   "x_serialization_backend" : "JSON::PP version 2.27300_01"
 }
