@@ -2,6 +2,10 @@ Revision history for Perl extension HTML::FillInForm::Lite.
 
 {{$NEXT}}
 
+1.15 2016-08-21T11:33:30Z
+    - Remove tests with encoding.pm, which is now obsolete (#3, #6)
+    - Rquires Test::Requires as "test" prereqisites (#5, #7)
+
 1.14 2016-04-16T13:24:00Z
     - Fix a bug that attribute name "data-name" overrode the "name" attribute(#4 by @mono0x)
 

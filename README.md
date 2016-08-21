@@ -4,7 +4,7 @@ HTML::FillInForm::Lite - Lightweight FillInForm module in Pure Perl
 
 # VERSION
 
-The document describes HTML::FillInForm::Lite version 1.14
+The document describes HTML::FillInForm::Lite version 1.15
 
 # SYNOPSIS
 
